@@ -84,7 +84,6 @@
         <script type="text/javascript">
             let groupeEleves = [];
 
-
             // -----------------------------------------------------
             /*
              * --- Courte description de la fonction ICI ---
@@ -99,16 +98,21 @@
                 return note
             }
 
+            function moyenneGroupe(groupe, moyenne){
+                let moyenneG =  Math.round((moyenne/groupe)*100)/100 ;
+                return moyenneG
+            }
+
             // -----------------------------------------------------
 
             // création des 3 élèves et rangement dans le tableau des élèves
             let pierre = new Eleve("Dupond", "Pierre", "Kercode");
             groupeEleves.push(pierre)
 
-            let marie = new Eleve("Fontaine", "Marie", "Kercode");
+            let marie = new Eleve("Fontaine", "Marie", "BTS");
             groupeEleves.push(marie)
 
-            let john = new Eleve("Hunter", "John", "Kercode");
+            let john = new Eleve("Hunter", "John", "CDA");
             groupeEleves.push(john)
 
 
@@ -121,32 +125,50 @@
             marie.presentation()
 
 
-            // attribution de notes en maths
-
-           
-
-
             // attribution des notes en mathématique (marieFontaine et pierreDupont)
             marie.newNoteMath(10);
             pierre.newNoteMath(15);
-
-
-
-
+            pierre.newNoteMath(15);
+            pierre.newNoteMath(15);
+            pierre.newNoteMath(15);
+            pierre.newNoteAlgo(20);
+            pierre.newNoteAlgo(20);
+            pierre.newNoteJs(10);
+            john.newNoteMath(10);
+            john.newNoteJs(10);
+            john.newNoteJs(14);
+            
             // attribution de la note de 18 à johnHunter
             john.newNoteAlgo(18)
-
 
             // ajout d'une note aléatoire en algorithmique pour chaque élève
 
             for (i=0; i< groupeEleves.length; i++){
-                marie.newNoteAlgo(genererNote())
-                pierre.newNoteAlgo(genererNote())
-                john.newNoteAlgo(genererNote())
+                let eleve = groupeEleves[i];
+                eleve.newNoteAlgo(genererNote())
             }
 
-
+            console.log(pierre)
+            console.log(marie)
+            console.log(john)
+ 
             // moyenne du groupe en algorithmique
+
+            var sumMoyenne = 0;
+            var groupe = groupeEleves.length;
+
+            for (let eleve in groupeEleves){
+                let objEleve = groupeEleves[eleve];
+                let moyenne =  objEleve.moyenneMath();
+                sumMoyenne += moyenne
+            }
+
+            console.log("Math: " + moyenneGroupe(groupe, sumMoyenne))
+            alert("le groupe à " + moyenneGroupe(groupe, sumMoyenne) + " de moyenne en mathematique")
+
+
+
+
         </script>
 </body>
 
