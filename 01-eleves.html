@@ -84,24 +84,37 @@
         <script type="text/javascript">
             let groupeEleves = [];
 
-            // -----------------------------------------------------
-            /*
-             * --- Courte description de la fonction ICI ---
-             * Paramètres : --- paramètres ICI si il y en a ---
-             *  
-             * Retour : --- retour de la fonction ICI ---
-             */
+            /*genererNote()
+
+            Genere une note aléatoire avec la la methode random() de la class Math.
+
+            retourne le nombre generer entre 0 et 20
+
+            */
 
             function genererNote() {
-                // CODE HERE
-                let note =  Math.floor(Math.random() * 20) ;
+                let note = Math.floor(Math.random() * 21);
                 return note
             }
 
-            function moyenneGroupe(groupe, moyenne){
-                let moyenneG =  Math.round((moyenne/groupe)*100)/100 ;
+
+
+            /*moyenneGroupe(parm1, param2)
+
+            param1 = nombre d'eleve dans le groupe
+            param2 = somme des moyennes de chaque élève du groupe
+
+            Calcul la moyenne des moyennes du groupe
+
+            return = le nombre generer entre 0 et 20
+
+            */
+
+            function moyenneGroupe(groupe, moyenne) {
+                let moyenneG = Math.round((moyenne / groupe) * 100) / 100;
                 return moyenneG
             }
+
 
             // -----------------------------------------------------
 
@@ -126,49 +139,62 @@
 
 
             // attribution des notes en mathématique (marieFontaine et pierreDupont)
-            marie.newNoteMath(10);
-            pierre.newNoteMath(15);
-            pierre.newNoteMath(15);
-            pierre.newNoteMath(15);
-            pierre.newNoteMath(15);
-            pierre.newNoteAlgo(20);
-            pierre.newNoteAlgo(20);
-            pierre.newNoteJs(10);
-            john.newNoteMath(10);
-            john.newNoteJs(10);
-            john.newNoteJs(14);
+            marie.newNote(10, "math");
+            marie.newNote(7, "algorithmique");
+            marie.newNote(6, "javascript");
+
+            marie.newNote(10, "math");
+            pierre.newNote(15, "math");
+            pierre.newNote(15, "math");
+            pierre.newNote(15, "math");
+            pierre.newNote(15, "math");
             
+            john.newNote(15 , "math");
+            john.newNote(15 , "math");
+
+            pierre.newNote(20 , "algorithmique");
+            pierre.newNote(20 , "algorithmique");
+
+            pierre.newNote(10, "javascript");
+            john.newNote(10, "javascript");
+            john.newNote(14, "javascript");
+
+
             // attribution de la note de 18 à johnHunter
-            john.newNoteAlgo(18)
+            john.newNote(18, "algo")
 
             // ajout d'une note aléatoire en algorithmique pour chaque élève
-
-            for (i=0; i< groupeEleves.length; i++){
+            for (i = 0; i < groupeEleves.length; i++) {
                 let eleve = groupeEleves[i];
-                eleve.newNoteAlgo(genererNote())
+                eleve.newNote(genererNote(), "algo")
             }
 
             console.log(pierre)
             console.log(marie)
             console.log(john)
- 
+
+            console.log("Pierre a " + pierre.moyenne("math") + " de moyenne en mathématique");
+            console.log("Marie a " + marie.moyenne("math") + " de moyenne en mathématique");
+            console.log("John a " + john.moyenne("math") + " de moyenne en mathématique");
+
             // moyenne du groupe en algorithmique
 
             var sumMoyenne = 0;
             var groupe = groupeEleves.length;
 
-            for (let eleve in groupeEleves){
+
+            for (let eleve in groupeEleves) {
                 let objEleve = groupeEleves[eleve];
-                let moyenne =  objEleve.moyenneMath();
+                let moyenne = objEleve.moyenne("math");
                 sumMoyenne += moyenne
             }
 
-            console.log("Math: " + moyenneGroupe(groupe, sumMoyenne))
-            alert("le groupe à " + moyenneGroupe(groupe, sumMoyenne) + " de moyenne en mathematique")
-
-
-
-
+            if (isNaN(moyenneGroupe(groupe, sumMoyenne))) {
+                alert("la moyenne du groupe ne peut etre calculée car tout les élèves n'ont pas encore de note ");
+            } else {
+                console.log("Math: " + moyenneGroupe(groupe, sumMoyenne))
+                alert("le groupe à " + moyenneGroupe(groupe, sumMoyenne) + " de moyenne en mathematique")
+            }
         </script>
 </body>
 
